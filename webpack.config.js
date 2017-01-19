@@ -14,7 +14,7 @@ module.exports = {
     publicPath: '/dist/'
   },
   externals:{
-
+    html2canvas: 'html2canvas'
   },
   resolve: {
     modulesDirectories: ['node_modules', './src'],

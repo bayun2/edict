@@ -3,7 +3,10 @@ import './index.less';
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import MyComponent from './myComponent';
+import CreateA from './CreateA';
+import CreateB from './CreateB';
+import CreateC from './CreateC';
+import CreateD from './CreateD';
 
 let pagePath, apiPath, apiSuffix;
 if (process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'debugremote') {
@@ -21,10 +24,11 @@ class App extends React.Component {
     super(props);
 
     this.state = {
-
+      status: 'create',
+      step: 'A'
     };
 
-    this.funcName = [];
+    this.funcName = ['goto'];
     this.funcName.forEach(funcName => {
       this[funcName] = this[funcName].bind(this);
     });
@@ -34,10 +38,36 @@ class App extends React.Component {
 
   }
 
+  goto(step) {
+    this.setState({
+      step
+    });
+  }
+
+  renderPage() {
+    const {status, step} = this.state;
+    if (status === 'create') {
+      if (step === 'A') {
+        return <CreateA goto={this.goto} />;
+      } else if (step === 'B') {
+        return <CreateB goto={this.goto} />;
+      } else if (step === 'C') {
+        return <CreateC goto={this.goto} />;
+      } else {
+        return <CreateD />;
+      }
+    } else if (status === 'reply') {
+      this.renderCreatePage();
+    } else if (status === 'receive') {
+      this.renderCreatePage();
+    }
+  }
+
   render() {
+    const curPage = this.renderPage();
     return (
       <div>
-
+        {curPage}
       </div>
     );
   }
