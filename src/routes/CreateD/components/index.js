@@ -9,6 +9,10 @@ class CreateD extends React.Component {
   constructor(props) {
     super(props);
 
+    this.state = {
+      showTip: false
+    };
+
     this.funcName = [];
     this.funcName.forEach(funcName => {
       this[funcName] = this[funcName].bind(this);
@@ -16,37 +20,9 @@ class CreateD extends React.Component {
   }
 
   componentDidMount() {
-    // const getPixelRatio = function(context) {
-    // 	const backingStore = context.backingStorePixelRatio ||
-    // 		context.webkitBackingStorePixelRatio ||
-    //     	context.mozBackingStorePixelRatio ||
-    //     	context.msBackingStorePixelRatio ||
-    //     	context.oBackingStorePixelRatio ||
-    //     	context.backingStorePixelRatio || 1;
-    // 	return (window.devicePixelRatio || 1) / backingStore;
-    // };
-    //
-    // const canvas = document.createElement('canvas');
-    // const context = canvas.getContext('2d');
-    // const scaleBy = getPixelRatio(context);
-    // const w = window.innerWidth;
-    // const h = window.innerHeight;
-    // canvas.width = w * scaleBy;
-    // canvas.height = h * scaleBy;
-    // canvas.style.width = `${w}px`;
-    // canvas.style.height = `${h}px`;
-    // context.scale(scaleBy, scaleBy);
-    // const ele = document.querySelector('.created');
-    // html2canvas(ele, {
-    //   allowTaint: true,
-    //   taintTest: false,
-    //   canvas,
-    //   onrendered: canvas => {
-    //     const image = canvas.toDataURL('image/jpg');
-    //     document.querySelector('.created').innerHTML =
-    //     `<img src='${image}' style='width:${w}px;height:${h}px'>`;
-    //   }
-    // });
+    setTimeout(() => {
+      this.show();
+    }, 1000);
   }
 
   componentWillUnmount() {
@@ -57,12 +33,27 @@ class CreateD extends React.Component {
     }
   }
 
+  show() {
+    this.setState({
+      showTip: true
+    });
+  }
+
+  renderShowTip() {
+    if (this.state.showTip) {
+      return <div className="shareTip"></div>;
+    } else {
+      return '';
+    }
+  }
+
   renderCnt() {
     const {status, reply} = this.props;
     let {msg, headimgurl, nickname} = this.props;
     if (status === 'create') {
       return (
           <div className="created page">
+            {this.renderShowTip()}
             <div className="title">
               <div className="cnt">{msg}</div>
             </div>
@@ -80,6 +71,7 @@ class CreateD extends React.Component {
       if (reply === 1) {
         return (
           <div className="relyd page">
+            {this.renderShowTip()}
             <div className="title">
               <div className="cnt">{msg}</div>
             </div>
@@ -90,6 +82,7 @@ class CreateD extends React.Component {
       } else if (reply === 2) {
         return (
           <div className="created page">
+            {this.renderShowTip()}
             <div className="refuse"></div>
           </div>
         );

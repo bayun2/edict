@@ -10,8 +10,12 @@ const {Router, browserHistory} = ReactRouter;
 let pagePath;
 if (process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'debugremote') {
   pagePath = '';
+  window.apiPath = '';
+  window.apiSuffix = '';
 } else if (process.env.NODE_ENV === 'development') {
   pagePath = 'pages';
+  window.apiPath = `${location.protocol}//${location.host}/data`;
+  window.apiSuffix = '.json';
 }
 
 function withExampleBasename(history, dirname) {

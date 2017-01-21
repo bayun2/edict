@@ -8,7 +8,7 @@ class CreateD extends React.Component {
   constructor(props) {
     super(props);
 
-    this.funcName = ['reply', 'refuse'];
+    this.funcName = ['reply', 'refuse', 'replyEdict'];
     this.funcName.forEach(funcName => {
       this[funcName] = this[funcName].bind(this);
     });
@@ -22,12 +22,33 @@ class CreateD extends React.Component {
 
   }
 
+  replyEdict(reply) {
+    this.postData = {
+      sourceOpenId: this.props.sourceOpenId,
+      reply,
+      openId: this.props.openId,
+      msg: this.props.msg,
+      nickname: this.props.nickname,
+      headimgurl: this.props.headimgurl
+    };
+    fetch(`${window.apiPath}/replyEdict${window.apiSuffix}`, {
+      method: 'POST',
+      body: JSON.stringify(this.postData),
+    })
+      .then(response => response.json())
+      .then(json => {
+        browserHistory.push('created');
+      })
+      .catch(() => {
+
+      });
+  }
+
   refuse() {
-    const url = this.props.addParam('created');
     this.props.setState({
       reply: 2
     }, () => {
-      browserHistory.push(url);
+      this.replyEdict(2);
     });
   }
 
@@ -63,11 +84,16 @@ CreateD.defaultProps = {
 
 CreateD.propTypes = {
   addParam: React.PropTypes.func,
+  headimgurl: React.PropTypes.string,
+  msg: React.PropTypes.string,
+  nickname: React.PropTypes.string,
+  openId: React.PropTypes.string,
   reply: React.PropTypes.number,
   setState: React.PropTypes.func,
   sourceHeadimgurl: React.PropTypes.string,
   sourceMsg: React.PropTypes.string,
   sourceNickName: React.PropTypes.string,
+  sourceOpenId: React.PropTypes.string,
   status: React.PropTypes.string
 };
 

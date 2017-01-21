@@ -1,6 +1,6 @@
 import React from 'react';
 import * as ReactRouter from 'react-router';
-import UrlParse from 'url-parse';
+import fetch from 'isomorphic-fetch';
 
 const {Link, browserHistory} = ReactRouter;
 
@@ -8,20 +8,62 @@ class CreateB extends React.Component {
   constructor(props) {
     super(props);
 
-    this.funcName = ['handleChange'];
+    this.funcName = ['handleChange', 'sendEdict', 'replyEdict'];
     this.funcName.forEach(funcName => {
       this[funcName] = this[funcName].bind(this);
     });
   }
 
   componentWillUnmount() {
-    
+
   }
 
   handleChange(event) {
     let msg = event.target.value;
     msg = msg.substr(0, 50);
     this.props.setState({msg});
+  }
+
+  sendEdict() {
+    this.postData = {
+      openId: this.props.openId,
+      msg: this.props.msg,
+      nickname: this.props.nickname,
+      headimgurl: this.props.headimgurl
+    };
+    fetch(`${window.apiPath}/sendEdict${window.apiSuffix}`, {
+      method: 'POST',
+      body: JSON.stringify(this.postData),
+    })
+      .then(response => response.json())
+      .then(json => {
+        browserHistory.push('created');
+      })
+      .catch(() => {
+
+      });
+  }
+
+  replyEdict(reply) {
+    this.postData = {
+      sourceOpenId: this.props.sourceOpenId,
+      reply,
+      openId: this.props.openId,
+      msg: this.props.msg,
+      nickname: this.props.nickname,
+      headimgurl: this.props.headimgurl
+    };
+    fetch(`${window.apiPath}/replyEdict${window.apiSuffix}`, {
+      method: 'POST',
+      body: JSON.stringify(this.postData),
+    })
+      .then(response => response.json())
+      .then(json => {
+        browserHistory.push('created');
+      })
+      .catch(() => {
+
+      });
   }
 
   renderCnt() {
@@ -34,7 +76,7 @@ class CreateB extends React.Component {
                 <textarea onChange={this.handleChange} placeholder="点击起草圣旨"></textarea>
               </div>
             </div>
-            <Link className="btn" to={addParam('/created')}>生成祝福</Link>
+            <div className="btn" onClick={this.sendEdict}>生成祝福</div>
           </div>
       );
     } else if (status === 'reply') {
@@ -45,7 +87,7 @@ class CreateB extends React.Component {
                 <textarea onChange={this.handleChange} placeholder="点此复旨" ></textarea>
               </div>
             </div>
-            <Link className="btn" to={addParam('/created')}>生成</Link>
+            <Link className="btn" onClick={this.replyEdict.bind(this, 1)}>生成</Link>
           </div>
       );
     }
@@ -63,7 +105,12 @@ CreateB.defaultProps = {
 
 CreateB.propTypes = {
   addParam: React.PropTypes.func,
+  headimgurl: React.PropTypes.string,
+  msg: React.PropTypes.string,
+  nickname: React.PropTypes.string,
+  openId: React.PropTypes.string,
   setState: React.PropTypes.func,
+  sourceOpenId: React.PropTypes.string,
   status: React.PropTypes.string
 };
 

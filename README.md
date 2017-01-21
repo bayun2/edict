@@ -1,5 +1,10 @@
 # edict
 
+新建-》选择方式=》生成=》分享以后展示页
+http://192.168.199.216/pages/createa -> createb(c) -> created -> createe
+
+http://192.168.199.216/pages/createa?status=reply -> createb(c) -> created -> createe
+
 openId:均表示当前用户
 
 1 url：(创建|回复|收到回复， 通过参数不同区分，见下文)
@@ -7,13 +12,50 @@ openId:均表示当前用户
 status:create,
 openId, nickname, headimgurl
 
+// create页面预埋数据
+window.scriptPath = '/dist/';
+window.config = {
+  status: 'create',
+  openId: 'a',
+  nickname: 'a用户',
+  headimgurl: 'http://placehold.it/122x122'
+}
+
 在页面埋入状态信息：(回复)
 status:reply,
 openId, nickname, headimgurl, imgurl(新建圣旨生成图片), sourceOpenId（发起圣旨人）, sourceNickName
 
+// reply页面预埋数据
+window.scriptPath = '/dist/';
+window.config = {
+  status: 'reply',
+  openId: 'b',
+  nickname: 'b用户',
+  headimgurl: 'http://placehold.it/122x122',
+  sourceOpenId: 'a',
+  sourceNickName: 'a用户',
+  sourceMsg: '嘿嘿嘿',
+  sourceHeadimgurl: 'http://placehold.it/122x122'
+}
+
 在页面埋入状态信息：(收到回复)
 status:receive,
 openId, nickname, headimgurl, imgurl(回复圣旨生成图片), sourceOpenId（回复圣旨人）, sourceNickName
+
+// receive页面预埋数据
+window.scriptPath = '/dist/';
+// reply: 1 回复，2 拒绝
+window.config = {
+  status: 'receive',
+  reply: 2,
+  openId: 'a',
+  nickname: 'a用户',
+  headimgurl: 'http://placehold.it/122x122',
+  sourceOpenId: 'b',
+  sourceNickName: 'b用户',
+  sourceMsg: '嘿嘿嘿',
+  sourceHeadimgurl: 'http://placehold.it/122x122'
+}
 
 2 获取微信分享所需参数接口
 
