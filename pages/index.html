@@ -9,7 +9,48 @@
 </head>
 <body>
 	<section id="J-activity" class="m-activity j-activity"></section>
+	<script src="//res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
 	<script src="//cdn.bootcss.com/html2canvas/0.5.0-beta4/html2canvas.min.js"></script>
+	<script type="text/javascript">
+		// create页面预埋数据
+		window.scriptPath = '/dist/';
+		window.config = {
+			status: 'create',
+			openId: 'a',
+			nickname: 'a用户',
+			headimgurl: 'http://placehold.it/122x122'
+		}
+	</script>
+	<!-- <script type="text/javascript">
+		// reply页面预埋数据
+		window.scriptPath = '/dist/';
+		window.config = {
+			status: 'reply',
+			openId: 'b',
+			nickname: 'b用户',
+			headimgurl: 'http://placehold.it/122x122',
+			sourceOpenId: 'a',
+			sourceNickName: 'a用户',
+			sourceMsg: '嘿嘿嘿',
+			sourceHeadimgurl: 'http://placehold.it/122x122'
+		}
+	</script> -->
+	<!-- <script type="text/javascript">
+		// receive页面预埋数据
+		window.scriptPath = '/dist/';
+		// reply: 1 回复，2 拒绝
+		window.config = {
+			status: 'receive',
+			reply: 2,
+			openId: 'a',
+			nickname: 'a用户',
+			headimgurl: 'http://placehold.it/122x122',
+			sourceOpenId: 'b',
+			sourceNickName: 'b用户',
+			sourceMsg: '嘿嘿嘿',
+			sourceHeadimgurl: 'http://placehold.it/122x122'
+		}
+	</script> -->
   <script src="/dist/index.js" charset="utf-8"></script>
 </body>
 </html>

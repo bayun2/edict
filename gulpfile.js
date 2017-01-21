@@ -120,7 +120,7 @@ gulp.task('dev', cb => {
       console.log(err);
       return;
     } else {
-      console.log('Page is running at: http://local.forexmaster.cn/pages/index.html');
+      console.log('Page is running at: http://local.forexmaster.cn/pages/createa');
     }
     cb();
   });
