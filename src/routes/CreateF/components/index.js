@@ -23,21 +23,25 @@ class CreateD extends React.Component {
   }
 
   replyEdict(reply) {
+    const self = this;
     this.postData = {
-      sourceOpenId: this.props.sourceOpenId,
       reply,
-      openId: this.props.openId,
       msg: this.props.msg,
-      nickname: this.props.nickname,
-      headimgurl: this.props.headimgurl
+      msgId: this.props.msgId
     };
-    fetch(`${window.apiPath}/replyEdict${window.apiSuffix}`, {
+    fetch(`${window.apiPath}/add${window.apiSuffix}`, {
       method: 'POST',
       body: JSON.stringify(this.postData),
     })
       .then(response => response.json())
       .then(json => {
-        browserHistory.push('created');
+        self.props.setState({
+          image: json.image,
+          shareUrl: json.shareUrl
+        }, () => {
+          const url = this.props.addParam('created');
+          browserHistory.push(url);
+        });
       })
       .catch(() => {
 
@@ -63,12 +67,8 @@ class CreateD extends React.Component {
 
   render() {
     return (
-        <div className="replyb page">
-          <div className="title">
-            <div className="cnt">{this.props.sourceMsg}</div>
-          </div>
-          <img className="headimg" src={this.props.sourceHeadimgurl} />
-          <div className="nickname">{this.props.sourceNickName}</div>
+        <div className="replyb picwrap">
+          <img className="cutpic" src={this.props.curImage} />
           <div className="btngroup">
             <div className="btn a" onClick={this.reply}>复旨</div>
             <div className="btn b" onClick={this.refuse}>抗旨</div>
@@ -84,8 +84,10 @@ CreateD.defaultProps = {
 
 CreateD.propTypes = {
   addParam: React.PropTypes.func,
+  curImage: React.PropTypes.string,
   headimgurl: React.PropTypes.string,
   msg: React.PropTypes.string,
+  msgId: React.PropTypes.string,
   nickname: React.PropTypes.string,
   openId: React.PropTypes.string,
   reply: React.PropTypes.number,

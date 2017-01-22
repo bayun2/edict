@@ -20,17 +20,18 @@ class CreateD extends React.Component {
 
   componentDidMount() {
     const weixin_share_config = {
-      link: location.href,
-      imgUrl: '图片',
+      link: this.props.shareUrl,
+      imgUrl: this.props.image,
       success: function(type) {
-
+        const url = this.props.addParam('createe');
+        browserHistory.push(url);
       },
       timeline: {
-        title: '朋友圈内容'
+        title: this.props.msg
       },
       appmessage: {
-        title: '发给朋友标题',
-        desc: '发给朋友内容'
+        title: '圣旨',
+        desc: this.props.msg
       }
     };
     new ShareWeixin(weixin_share_config);
@@ -62,18 +63,13 @@ class CreateD extends React.Component {
   }
 
   renderCnt() {
-    const {status, reply} = this.props;
+    const {status, reply, image} = this.props;
     let {msg, headimgurl, nickname} = this.props;
     if (status === 'create') {
       return (
-          <div className="created page">
+          <div className="created picwrap">
             {this.renderShowTip()}
-            <div className="title">
-              <div className="cnt">{msg}</div>
-            </div>
-            <img className="headimg" src={headimgurl} />
-            <div className="nickname">{nickname}</div>
-            <Link className="btn" to={'/createa'}>再玩一次</Link>
+            <img className="cutpic" src={image} />
           </div>
       );
     } else if (status === 'reply' || status === 'receive') {
@@ -105,8 +101,20 @@ class CreateD extends React.Component {
   }
 
   render() {
-    const cnt = this.renderCnt();
-    return cnt;
+    // const cnt = this.renderCnt();
+    // return cnt;
+    const {status, curImage} = this.props;
+    let {image} = this.props;
+    if (status === 'receive') {
+      image = curImage;
+    }
+    return (
+        <div className="created picwrap">
+          {this.renderShowTip()}
+          <img className="cutpic" src={image} />
+        </div>
+    );
+
   }
 }
 
@@ -116,11 +124,14 @@ CreateD.defaultProps = {
 
 CreateD.propTypes = {
   addParam: React.PropTypes.func,
+  curImage: React.PropTypes.string,
   headimgurl: React.PropTypes.string,
+  image: React.PropTypes.string,
   msg: React.PropTypes.string,
   nickname: React.PropTypes.string,
   reply: React.PropTypes.number,
   setState: React.PropTypes.func,
+  shareUrl: React.PropTypes.string,
   sourceHeadimgurl: React.PropTypes.string,
   sourceMsg: React.PropTypes.string,
   sourceNickName: React.PropTypes.string,

@@ -13,6 +13,7 @@ class App extends React.Component {
       status: window.config.status || '',
       openId: window.config.openId || '',
       msg: window.config.msg || '',
+      msgId: window.config.msgId || '',
       nickname: window.config.nickname || '',
       headimgurl: window.config.headimgurl || '',
       sourceMsg: window.config.sourceMsg || '',
@@ -20,32 +21,14 @@ class App extends React.Component {
       sourceNickName: window.config.sourceNickName || '',
       sourceHeadimgurl: window.config.sourceHeadimgurl || '',
       reply: window.config.reply || 0,
+      shareUrl: '',
+      image: '',
+      curImage: window.config.curImage || ''
     };
   }
+  
   componentWillMount() {
 
-    // const self = this;
-    // window.fdt.getToken(tokenData => {
-    //   if(!!tokenData && tokenData.token) {
-    //     self.setState({
-    //       myHeader: {
-    //         'fdt-key': tokenData.token
-    //       }
-    //     });
-    //     sessionStorage.setItem('key', tokenData.token);
-    //   }
-    // });
-    // window.fdt.jsBridge.menuSetting({
-    //   share: 1
-    // });
-    // const config = {
-    //   title: 'FDT-小T擂台',
-    //   msg: '我在小T擂台打败了巴菲特！你敢来挑战吗？',
-    //   url: location.href,
-    //   image: 'http://img.investmaster.cn/fdt_hz/klinetc/logo.png',
-    //   type: '',
-    //   category: ''
-    // };
   }
 
   render() {

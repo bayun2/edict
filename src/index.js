@@ -9,8 +9,8 @@ __webpack_public_path__ = window.scriptPath;
 const {Router, browserHistory} = ReactRouter;
 let pagePath;
 if (process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'debugremote') {
-  pagePath = '';
-  window.apiPath = '';
+  pagePath = 'pages';
+  window.apiPath = '${location.protocol}//${location.host}/message';
   window.apiSuffix = '';
 } else if (process.env.NODE_ENV === 'development') {
   pagePath = 'pages';

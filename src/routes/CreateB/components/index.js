@@ -25,19 +25,23 @@ class CreateB extends React.Component {
   }
 
   sendEdict() {
+    const self = this;
     this.postData = {
-      openId: this.props.openId,
-      msg: this.props.msg,
-      nickname: this.props.nickname,
-      headimgurl: this.props.headimgurl
+      msg: this.props.msg
     };
-    fetch(`${window.apiPath}/sendEdict${window.apiSuffix}`, {
+    fetch(`${window.apiPath}/add${window.apiSuffix}`, {
       method: 'POST',
       body: JSON.stringify(this.postData),
     })
       .then(response => response.json())
       .then(json => {
-        browserHistory.push('created');
+        self.props.setState({
+          image: json.image,
+          shareUrl: json.shareUrl
+        }, () => {
+          const url = this.props.addParam('created');
+          browserHistory.push(url);
+        });
       })
       .catch(() => {
 
@@ -45,21 +49,25 @@ class CreateB extends React.Component {
   }
 
   replyEdict(reply) {
+    const self = this;
     this.postData = {
-      sourceOpenId: this.props.sourceOpenId,
       reply,
-      openId: this.props.openId,
       msg: this.props.msg,
-      nickname: this.props.nickname,
-      headimgurl: this.props.headimgurl
+      msgId: this.props.msgId
     };
-    fetch(`${window.apiPath}/replyEdict${window.apiSuffix}`, {
+    fetch(`${window.apiPath}/add${window.apiSuffix}`, {
       method: 'POST',
       body: JSON.stringify(this.postData),
     })
       .then(response => response.json())
       .then(json => {
-        browserHistory.push('created');
+        self.props.setState({
+          image: json.image,
+          shareUrl: json.shareUrl
+        }, () => {
+          const url = this.props.addParam('created');
+          browserHistory.push(url);
+        });
       })
       .catch(() => {
 
@@ -107,6 +115,7 @@ CreateB.propTypes = {
   addParam: React.PropTypes.func,
   headimgurl: React.PropTypes.string,
   msg: React.PropTypes.string,
+  msgId: React.PropTypes.string,
   nickname: React.PropTypes.string,
   openId: React.PropTypes.string,
   setState: React.PropTypes.func,

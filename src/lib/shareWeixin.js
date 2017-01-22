@@ -108,3 +108,5 @@ ShareWeixin.prototype.share = function(opt) {
     });
   });
 };
+
+module.exports = ShareWeixin;
