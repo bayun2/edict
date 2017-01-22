@@ -24,15 +24,13 @@ class CreateD extends React.Component {
 
   replyEdict(reply) {
     const self = this;
-    this.postData = {
-      reply,
-      msg: this.props.msg,
-      msgId: this.props.msgId
-    };
     fetch(`${window.apiPath}/add${window.apiSuffix}`, {
       credentials: 'include',
       method: 'POST',
-      body: JSON.stringify(this.postData),
+      headers: {
+        'Content-type': 'application/x-www-form-urlencoded;charset=UTF-8'
+      },
+      body: `reply=${reply}&msg=${self.props.msg}&msgId=${self.props.msgId}`
     })
       .then(response => response.json())
       .then(json => {
