@@ -3,8 +3,8 @@ function ShareWeixin(opt) {
 }
 
 ShareWeixin.prototype.init = function(opt) {
-  var self = this;
-  var isWeixin = (/MicroMessenger/ig).test(navigator.userAgent);
+  const self = this;
+  const isWeixin = (/MicroMessenger/ig).test(navigator.userAgent);
   if (isWeixin) {
     $.ajax({
       url: '//prod.forexmaster.cn/jsocial/wxInfo',
@@ -21,7 +21,7 @@ ShareWeixin.prototype.init = function(opt) {
           signature: o.signature,
           rawString: o.rawString,
           jsApiList: ['onMenuShareTimeline', 'onMenuShareAppMessage',
-           'onMenuShareQQ', 'onMenuShareWeibo', 'onMenuShareQZone']
+            'onMenuShareQQ', 'onMenuShareWeibo', 'onMenuShareQZone']
         });
         self.share(opt);
       },
@@ -30,10 +30,10 @@ ShareWeixin.prototype.init = function(opt) {
       }
     });
   }
-}
+};
 
 ShareWeixin.prototype.share = function(opt) {
-  var config = $.extend(weixin_share_config, opt);
+  const config = $.extend(weixin_share_config, opt);
   if (!config.success) {
     config.success = function(type) {
 
@@ -64,10 +64,10 @@ ShareWeixin.prototype.share = function(opt) {
       type: '',
       dataUrl: '',
       success: function(o) {
-        config.success.apply(config, ['appmessage', o])
+        config.success.apply(config, ['appmessage', o]);
       },
       cancel: function(o) {
-        config.cancel.apply(config, ['appmessage', o])
+        config.cancel.apply(config, ['appmessage', o]);
       }
     });
     wx.onMenuShareQQ({ // 分享到QQ
@@ -76,10 +76,10 @@ ShareWeixin.prototype.share = function(opt) {
       link: config.link + (config.params || ''),
       imgUrl: config.imgUrl,
       success: function(o) {
-        config.success.apply(config, ['qq', o])
+        config.success.apply(config, ['qq', o]);
       },
       cancel: function(o) {
-        config.cancel.apply(config, ['qq', o])
+        config.cancel.apply(config, ['qq', o]);
       }
     });
     wx.onMenuShareWeibo({ // 分享到腾讯微博
@@ -88,10 +88,10 @@ ShareWeixin.prototype.share = function(opt) {
       link: config.link + (config.params || ''),
       imgUrl: config.imgUrl,
       success: function(o) {
-        config.success.apply(config, ['weibo', o])
+        config.success.apply(config, ['weibo', o]);
       },
       cancel: function(o) {
-        config.cancel.apply(config, ['weibo', o])
+        config.cancel.apply(config, ['weibo', o]);
       }
     });
     wx.onMenuShareQZone({ // 分享到QQ空间
@@ -100,11 +100,11 @@ ShareWeixin.prototype.share = function(opt) {
       link: config.link + (config.params || ''),
       imgUrl: config.imgUrl,
       success: function(o) {
-        config.success.apply(config, ['qzone', o])
+        config.success.apply(config, ['qzone', o]);
       },
       cancel: function(o) {
-        config.cancel.apply(config, ['qzone', o])
+        config.cancel.apply(config, ['qzone', o]);
       }
     });
   });
-}
+};

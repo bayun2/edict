@@ -1,7 +1,6 @@
 import React from 'react';
-// import html2canvas from 'html2canvas';
 import * as ReactRouter from 'react-router';
-import UrlParse from 'url-parse';
+import ShareWeixin from '../../../lib/shareWeixin';
 
 const {Link, browserHistory} = ReactRouter;
 
@@ -20,6 +19,21 @@ class CreateD extends React.Component {
   }
 
   componentDidMount() {
+    const weixin_share_config = {
+      link: location.href,
+      imgUrl: '图片',
+      success: function(type) {
+
+      },
+      timeline: {
+        title: '朋友圈内容'
+      },
+      appmessage: {
+        title: '发给朋友标题',
+        desc: '发给朋友内容'
+      }
+    };
+    new ShareWeixin(weixin_share_config);
     setTimeout(() => {
       this.show();
     }, 1000);

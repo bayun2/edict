@@ -9,7 +9,7 @@ class CreateE extends React.Component {
   constructor(props) {
     super(props);
 
-    this.funcName = [];
+    this.funcName = ['closeWindow'];
     this.funcName.forEach(funcName => {
       this[funcName] = this[funcName].bind(this);
     });
@@ -19,11 +19,18 @@ class CreateE extends React.Component {
 
   }
 
+  closeWindow() {
+    const isWeixin = (/MicroMessenger/ig).test(navigator.userAgent);
+    if (isWeixin) {
+      wx.closeWindow();
+    }
+  }
+
   render() {
     return (
         <div className="createe page">
           <Link className="btn a" to="/createa" />
-          <div className="btn b"></div>
+          <div className="btn b" onClick={this.closeWindow}></div>
         </div>
     );
   }
