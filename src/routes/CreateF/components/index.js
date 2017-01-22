@@ -30,6 +30,7 @@ class CreateD extends React.Component {
       msgId: this.props.msgId
     };
     fetch(`${window.apiPath}/add${window.apiSuffix}`, {
+      credentials: 'include',
       method: 'POST',
       body: JSON.stringify(this.postData),
     })
