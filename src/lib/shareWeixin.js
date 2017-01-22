@@ -11,6 +11,7 @@ ShareWeixin.prototype.init = function(opt) {
       data: {pageUrl: location.href},
       dataType: 'json',
       success: function(o) {
+        alert(4)
         wx.config({
           debug: weixin_share_config.debug || false,
           appId: o.appId,
@@ -21,6 +22,7 @@ ShareWeixin.prototype.init = function(opt) {
           jsApiList: ['onMenuShareTimeline', 'onMenuShareAppMessage',
             'onMenuShareQQ', 'onMenuShareWeibo', 'onMenuShareQZone']
         });
+        alert(3)
         self.share(opt);
       },
       error: function() {
@@ -31,7 +33,9 @@ ShareWeixin.prototype.init = function(opt) {
 };
 
 ShareWeixin.prototype.share = function(opt) {
+  alert(5)
   const config = $.extend(weixin_share_config, opt);
+  alert(6)
   if (!config.success) {
     config.success = function(type) {
 
@@ -42,7 +46,9 @@ ShareWeixin.prototype.share = function(opt) {
 
     };
   }
+  alert(config)
   wx.ready(function() {
+    alert(2)
     wx.onMenuShareTimeline({ // 分享到朋友圈
       title: (config.timeline && config.timeline.title) || config.title,
       link: config.link + (config.params || ''),
