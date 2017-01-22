@@ -7,11 +7,9 @@ ShareWeixin.prototype.init = function(opt) {
   const isWeixin = (/MicroMessenger/ig).test(navigator.userAgent);
   if (isWeixin) {
     $.ajax({
-      url: '//prod.forexmaster.cn/jsocial/wxInfo',
+      url: '//dlkddh.derlook.com/message/wxConfig',
       data: {pageUrl: location.href},
-      dataType: 'jsonp',
-      jsonp: "callback",
-      jsonpCallback: "getSignPackage",
+      dataType: 'json',
       success: function(o) {
         wx.config({
           debug: weixin_share_config.debug || false,
