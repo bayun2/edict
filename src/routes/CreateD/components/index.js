@@ -19,25 +19,34 @@ class CreateD extends React.Component {
   }
 
   componentDidMount() {
-    const weixin_share_config = {
-      link: this.props.shareUrl,
-      imgUrl: this.props.image,
-      success: function(type) {
-        const url = this.props.addParam('createe');
-        browserHistory.push(url);
-      },
-      timeline: {
-        title: this.props.msg
-      },
-      appmessage: {
-        title: '圣旨',
-        desc: this.props.msg
+    const {reply, status} = this.props;
+    if (status !== 'receive') {
+      const weixin_share_config = {
+        link: this.props.shareUrl,
+        imgUrl: this.props.image,
+        success: function(type) {
+          const url = this.props.addParam('createe');
+          browserHistory.push(url);
+        },
+        timeline: {
+          title: this.props.msg
+        },
+        appmessage: {
+          title: '圣旨',
+          desc: this.props.msg
+        }
+      };
+      new ShareWeixin(weixin_share_config);
+      setTimeout(() => {
+        this.show();
+      }, 1000);
+    } else {
+      if (reply === 2) {
+        setTimeout(() => {
+          browserHistory.push('createa');
+        }, 5000);
       }
-    };
-    new ShareWeixin(weixin_share_config);
-    setTimeout(() => {
-      this.show();
-    }, 1000);
+    }
   }
 
   componentWillUnmount() {
@@ -63,8 +72,7 @@ class CreateD extends React.Component {
   }
 
   renderCnt() {
-    const {status, reply, image} = this.props;
-    let {msg, headimgurl, nickname} = this.props;
+    const {status, reply, image, curImage} = this.props;
     if (status === 'create') {
       return (
           <div className="created picwrap">
@@ -72,28 +80,27 @@ class CreateD extends React.Component {
             <img className="cutpic" src={image} />
           </div>
       );
-    } else if (status === 'reply' || status === 'receive') {
-      if (status === 'receive') {
-        msg = this.props.sourceMsg;
-        headimgurl = this.props.sourceHeadimgurl;
-        nickname = this.props.sourceNickName;
-      }
+    } else if (status === 'reply') {
+      return (
+        <div className="created picwrap">
+          {this.renderShowTip()}
+          <img className="cutpic" src={image} />
+        </div>
+      );
+    } else if (status === 'receive') {
       if (reply === 1) {
         return (
-          <div className="relyd page">
-            {this.renderShowTip()}
-            <div className="title">
-              <div className="cnt">{msg}</div>
+          <div className="relyd picwrap">
+            <img className="cutpic" src={curImage} />
+            <div className="btngroup">
+              <Link className="btn" to="/createa">再玩一次</Link>
             </div>
-            <img className="headimg" src={headimgurl} />
-            <div className="nickname">{nickname}</div>
           </div>
         );
       } else if (reply === 2) {
         return (
-          <div className="created page">
-            {this.renderShowTip()}
-            <div className="refuse"></div>
+          <div className="relyd picwrap">
+            <img className="cutpic" src={curImage} />
           </div>
         );
       }
@@ -101,20 +108,8 @@ class CreateD extends React.Component {
   }
 
   render() {
-    // const cnt = this.renderCnt();
-    // return cnt;
-    const {status, curImage} = this.props;
-    let {image} = this.props;
-    if (status === 'receive') {
-      image = curImage;
-    }
-    return (
-        <div className="created picwrap">
-          {this.renderShowTip()}
-          <img className="cutpic" src={image} />
-        </div>
-    );
-
+    const cnt = this.renderCnt();
+    return cnt;
   }
 }
 
