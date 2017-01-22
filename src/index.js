@@ -10,7 +10,7 @@ const {Router, browserHistory} = ReactRouter;
 let pagePath;
 if (process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'debugremote') {
   pagePath = 'pages';
-  window.apiPath = '${location.protocol}//${location.host}/message';
+  window.apiPath = `${location.protocol}//${location.host}/message`;
   window.apiSuffix = '';
 } else if (process.env.NODE_ENV === 'development') {
   pagePath = 'pages';
