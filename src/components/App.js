@@ -40,7 +40,7 @@ class App extends React.Component {
         dataType: 'json',
         success: function(o) {
           wx.config({
-            debug: true,
+            debug: false,
             appId: o.appId,
             timestamp: o.timestamp,
             nonceStr: o.noncestr,

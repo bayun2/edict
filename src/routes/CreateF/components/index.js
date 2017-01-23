@@ -48,27 +48,28 @@ class CreateD extends React.Component {
   }
 
   refuse() {
-    this.props.setState({
-      reply: 2
-    }, () => {
-      this.replyEdict(2);
-    });
-  }
-
-  reply() {
+    const self = this;
     alert(0);
-    const url = this.props.addParam('createb');
     try {
+      alert(1);
       this.props.setState({
-        reply: 1
+        reply: 2
       }, () => {
-        alert(1);
-        browserHistory.push(url);
+        self.replyEdict(2);
       });
     } catch(err) {
       alert(err);
     }
 
+  }
+
+  reply() {
+    const url = this.props.addParam('createb');
+    this.props.setState({
+      reply: 1
+    }, () => {
+      browserHistory.push(url);
+    });
   }
 
   render() {
