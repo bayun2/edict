@@ -20,7 +20,7 @@ class CreateE extends React.Component {
     if (isWeixin) {
       $.ajax({
         url: '//dlkddh.derlook.com/message/wxConfig',
-        data: {pageUrl: location.href},
+        data: {pageUrl: encodeURIComponent(`http://dlkddh.derlook.com/pages/createa${location.search}`)},
         dataType: 'json',
         success: function(o) {
           wx.config({
