@@ -20,7 +20,7 @@ class CreateB extends React.Component {
 
   handleChange(event) {
     let msg = event.target.value;
-    msg = msg.substr(0, 50);
+    msg = msg.substr(0, 48);
     this.props.setState({msg});
   }
 
@@ -81,7 +81,8 @@ class CreateB extends React.Component {
           <div className="createb page">
             <div className="title">
               <div className="cnt">
-                <textarea onChange={this.handleChange} placeholder="点击起草圣旨"></textarea>
+                <textarea onChange={this.handleChange} placeholder="点击起草圣旨" value={this.props.msg}>
+                </textarea>
               </div>
             </div>
             <div className="btn" onClick={this.sendEdict}>生成祝福</div>
@@ -92,7 +93,8 @@ class CreateB extends React.Component {
           <div className="replyc page">
             <div className="title">
               <div className="cnt">
-                <textarea onChange={this.handleChange} placeholder="点此复旨" ></textarea>
+                <textarea onChange={this.handleChange} placeholder="点此复旨" value={this.props.msg}>
+                </textarea>
               </div>
             </div>
             <Link className="btn" onClick={this.replyEdict.bind(this, 1)}>生成</Link>

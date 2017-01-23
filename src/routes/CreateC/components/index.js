@@ -15,7 +15,7 @@ class CreateC extends React.Component {
 
   handleChange(event) {
     let msg = event.target.value;
-    msg = msg.substr(0, 50);
+    msg = msg.substr(0, 48);
     this.props.setState({msg});
   }
 
@@ -49,7 +49,8 @@ class CreateC extends React.Component {
         <div className="createc page">
           <div className="title">
             <div className="cnt">
-              <textarea onChange={this.handleChange} placeholder="点击起草圣旨"></textarea>
+              <textarea onChange={this.handleChange} placeholder="点击起草圣旨" value={this.props.msg}>
+              </textarea>
             </div>
           </div>
           <div className="btn" onClick={this.sendEdict}>生成指令</div>
@@ -64,7 +65,8 @@ CreateC.defaultProps = {
 
 CreateC.propTypes = {
   addParam: React.PropTypes.func,
-  setState: React.PropTypes.func
+  setState: React.PropTypes.func,
+  msg: React.PropTypes.string,
 };
 
 module.exports = CreateC;
