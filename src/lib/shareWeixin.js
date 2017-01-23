@@ -11,8 +11,12 @@ ShareWeixin.prototype.init = function(opt) {
       data: {pageUrl: location.href},
       dataType: 'json',
       success: function(o) {
+        alert(o.appId);
+        alert(o.timestamp);
+        alert(o.noncestr);
+        alert(o.signature);
         wx.config({
-          debug: opt.debug || false,
+          debug: true,
           appId: o.appId,
           timestamp: o.timestamp,
           nonceStr: o.noncestr,
