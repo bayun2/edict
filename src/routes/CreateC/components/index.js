@@ -7,7 +7,7 @@ class CreateC extends React.Component {
   constructor(props) {
     super(props);
 
-    this.funcName = ['replyEdict', 'handleChange'];
+    this.funcName = ['sendEdict', 'handleChange'];
     this.funcName.forEach(funcName => {
       this[funcName] = this[funcName].bind(this);
     });
