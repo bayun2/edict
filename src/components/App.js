@@ -34,13 +34,14 @@ class App extends React.Component {
   componentDidMount() {
     const isWeixin = (/MicroMessenger/ig).test(navigator.userAgent);
     if (isWeixin) {
+      alert(1)
       $.ajax({
         url: '//dlkddh.derlook.com/message/wxConfig',
         data: {pageUrl: encodeURIComponent(`http://dlkddh.derlook.com/pages/createa${location.search}`)},
         dataType: 'json',
         success: function(o) {
           wx.config({
-            debug: opt.debug || false,
+            debug: true,
             appId: o.appId,
             timestamp: o.timestamp,
             nonceStr: o.noncestr,
