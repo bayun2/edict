@@ -8,7 +8,7 @@ ShareWeixin.prototype.init = function(opt) {
   if (isWeixin) {
     $.ajax({
       url: '//dlkddh.derlook.com/message/wxConfig',
-      data: {pageUrl: location.href},
+      data: {pageUrl: encodeURIComponent(location.href.split('#')[0])},
       dataType: 'json',
       success: function(o) {
         alert(o.appId);
