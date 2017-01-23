@@ -36,7 +36,7 @@ class App extends React.Component {
     if (isWeixin) {
       $.ajax({
         url: '//dlkddh.derlook.com/message/wxConfig',
-        data: {pageUrl: `http://dlkddh.derlook.com/pages/createa${location.search}`},
+        data: {pageUrl: location.href.split('#')[0]},
         dataType: 'json',
         success: function(o) {
           wx.config({
