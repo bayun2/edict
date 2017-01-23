@@ -26,9 +26,33 @@ class App extends React.Component {
       curImage: window.config.curImage || ''
     };
   }
-  
+
   componentWillMount() {
 
+  }
+
+  componentDidMount() {
+    const isWeixin = (/MicroMessenger/ig).test(navigator.userAgent);
+    if (isWeixin) {
+      $.ajax({
+        url: '//dlkddh.derlook.com/message/wxConfig',
+        data: {pageUrl: encodeURIComponent(`http://dlkddh.derlook.com/pages/createa${location.search}`)},
+        dataType: 'json',
+        success: function(o) {
+          wx.config({
+            debug: opt.debug || false,
+            appId: o.appId,
+            timestamp: o.timestamp,
+            nonceStr: o.noncestr,
+            signature: o.signature,
+            jsApiList: ['closeWindow', 'onMenuShareTimeline', 'onMenuShareAppMessage']
+          });
+        },
+        error: function() {
+
+        }
+      });
+    }
   }
 
   render() {
