@@ -56,12 +56,19 @@ class CreateD extends React.Component {
   }
 
   reply() {
+    alert(0);
     const url = this.props.addParam('createb');
-    this.props.setState({
-      reply: 1
-    }, () => {
-      browserHistory.push(url);
-    });
+    try {
+      this.props.setState({
+        reply: 1
+      }, () => {
+        alert(1);
+        browserHistory.push(url);
+      });
+    } catch(err) {
+      alert(err);
+    }
+
   }
 
   render() {

@@ -1,7 +1,5 @@
 import React from 'react';
-import html2canvas from 'html2canvas';
 import * as ReactRouter from 'react-router';
-import ShareWeixin from '../../../lib/shareWeixin';
 
 const {Link} = ReactRouter;
 
