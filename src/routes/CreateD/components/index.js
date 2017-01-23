@@ -9,7 +9,8 @@ class CreateD extends React.Component {
     super(props);
 
     this.state = {
-      showTip: false
+      showTip: false,
+      showBtn: false
     };
 
     this.funcName = [];
@@ -20,13 +21,22 @@ class CreateD extends React.Component {
 
   componentDidMount() {
     const {reply, status, addParam} = this.props;
+    const self = this;
     if (status !== 'receive') {
       const weixin_share_config = {
         link: this.props.shareUrl,
         imgUrl: this.props.image,
         success: function(type) {
-          const url = addParam('createe');
-          browserHistory.push(url);
+          if (status === 'create') {
+            const url = addParam('createe');
+            browserHistory.push(url);
+          } else if (status === 'reply') {
+            const url = addParam('createe');
+            browserHistory.push(url);
+            self.setState({
+              showBtn: true
+            });
+          }
         },
         timeline: {
           title: this.props.msg
@@ -65,7 +75,9 @@ class CreateD extends React.Component {
 
   renderShowTip() {
     if (this.state.showTip) {
-      return <div className="shareTip"></div>;
+      let imgHeight = 434*window.innerWidth/640;
+      imgHeight = `${imgHeight}px`;
+      return <div className="shareTip" style={{height: imgHeight}}></div>;
     } else {
       return '';
     }
@@ -77,7 +89,7 @@ class CreateD extends React.Component {
       return (
           <div className="created picwrap">
             {this.renderShowTip()}
-            <img className="cutpic" src={image} />
+            <img className="cutpic" src={image}/>
           </div>
       );
     } else if (status === 'reply') {
