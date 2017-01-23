@@ -38,7 +38,7 @@ class CreateD extends React.Component {
           image: json.image,
           shareUrl: json.shareUrl
         }, () => {
-          const url = this.props.addParam('created');
+          const url = self.props.addParam('created');
           browserHistory.push(url);
         });
       })

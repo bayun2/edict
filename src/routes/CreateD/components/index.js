@@ -19,13 +19,13 @@ class CreateD extends React.Component {
   }
 
   componentDidMount() {
-    const {reply, status} = this.props;
+    const {reply, status, addParam} = this.props;
     if (status !== 'receive') {
       const weixin_share_config = {
         link: this.props.shareUrl,
         imgUrl: this.props.image,
         success: function(type) {
-          const url = this.props.addParam('createe');
+          const url = addParam('createe');
           browserHistory.push(url);
         },
         timeline: {
