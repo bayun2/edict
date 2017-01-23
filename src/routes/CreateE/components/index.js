@@ -49,7 +49,7 @@ class CreateE extends React.Component {
   render() {
     return (
         <div className="createe page">
-          <Link className="btn a" to="/createa" />
+          <a className="btn a" href="//dlkddh.derlook.com/pages/createa"></a>
           <div className="btn b" onClick={this.closeWindow}></div>
         </div>
     );

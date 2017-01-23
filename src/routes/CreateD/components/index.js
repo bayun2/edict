@@ -89,11 +89,13 @@ class CreateD extends React.Component {
       );
     } else if (status === 'receive') {
       if (reply === 1) {
+        let top = window.innerWidth*832/640;
+        top = `${top}px`;
         return (
           <div className="relyd picwrap">
             <img className="cutpic" src={curImage} />
-            <div className="btngroup">
-              <Link className="btn" to="/createa">再玩一次</Link>
+            <div className="btngroup" style={{top}}>
+              <a className="btn" href="//dlkddh.derlook.com/pages/createa">再玩一次</a>
             </div>
           </div>
         );

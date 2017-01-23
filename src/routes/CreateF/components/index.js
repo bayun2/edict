@@ -65,10 +65,12 @@ class CreateD extends React.Component {
   }
 
   render() {
+    let top = window.innerWidth*832/640;
+    top = `${top}px`;
     return (
         <div className="replyb picwrap">
           <img className="cutpic" src={this.props.curImage} />
-          <div className="btngroup">
+          <div className="btngroup" style={{top}}>
             <div className="btn a" onClick={this.reply}>复旨</div>
             <div className="btn b" onClick={this.refuse}>抗旨</div>
           </div>
