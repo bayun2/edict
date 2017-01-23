@@ -23,6 +23,7 @@ class CreateD extends React.Component {
   }
 
   replyEdict(reply) {
+    alert(3)
     const self = this;
     fetch(`${window.apiPath}/add${window.apiSuffix}`, {
       credentials: 'include',
@@ -34,26 +35,24 @@ class CreateD extends React.Component {
     })
       .then(response => response.json())
       .then(json => {
+        alert(4)
         self.props.setState({
           image: json.image,
-          shareUrl: json.shareUrl
+          shareUrl: json.shareUrl,
+          reply: reply
         }, () => {
           const url = self.props.addParam('created');
           browserHistory.push(url);
         });
       })
-      .catch(() => {
-
+      .catch((err) => {
+        alert(err)
       });
   }
 
   refuse() {
-    const self = this;
-    this.props.setState({
-      reply: 2
-    }, () => {
-      self.replyEdict(2);
-    });
+    alert(0)
+    this.replyEdict(2);
   }
 
   reply() {
