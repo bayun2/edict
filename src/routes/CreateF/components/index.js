@@ -1,8 +1,8 @@
 import React from 'react';
 import * as ReactRouter from 'react-router';
-import UrlParse from 'url-parse';
+import fetch from 'isomorphic-fetch';
 
-const {Link, browserHistory} = ReactRouter;
+const {browserHistory} = ReactRouter;
 
 class CreateD extends React.Component {
   constructor(props) {
@@ -23,7 +23,6 @@ class CreateD extends React.Component {
   }
 
   replyEdict(reply) {
-    alert(3)
     const self = this;
     fetch(`${window.apiPath}/add${window.apiSuffix}`, {
       credentials: 'include',
@@ -35,23 +34,20 @@ class CreateD extends React.Component {
     })
       .then(response => response.json())
       .then(json => {
-        alert(4)
         self.props.setState({
           image: json.image,
           shareUrl: json.shareUrl,
-          reply: reply
+          reply
         }, () => {
           const url = self.props.addParam('created');
           browserHistory.push(url);
         });
       })
-      .catch((err) => {
-        alert(err)
+      .catch(() => {
       });
   }
 
   refuse() {
-    alert(0)
     this.replyEdict(2);
   }
 
