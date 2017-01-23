@@ -49,18 +49,11 @@ class CreateD extends React.Component {
 
   refuse() {
     const self = this;
-    alert(0);
-    try {
-      alert(1);
-      this.props.setState({
-        reply: 2
-      }, () => {
-        self.replyEdict(2);
-      });
-    } catch(err) {
-      alert(err);
-    }
-
+    this.props.setState({
+      reply: 2
+    }, () => {
+      self.replyEdict(2);
+    });
   }
 
   reply() {
