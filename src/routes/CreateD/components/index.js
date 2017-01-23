@@ -39,7 +39,7 @@ class CreateD extends React.Component {
       new ShareWeixin(weixin_share_config);
       setTimeout(() => {
         this.show();
-      }, 1000);
+      }, 3000);
     } else {
       if (reply === 2) {
         setTimeout(() => {

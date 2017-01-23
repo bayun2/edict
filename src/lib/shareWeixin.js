@@ -15,9 +15,8 @@ ShareWeixin.prototype.init = function(opt) {
           debug: opt.debug || false,
           appId: o.appId,
           timestamp: o.timestamp,
-          nonceStr: o.nonceStr,
+          nonceStr: o.noncestr,
           signature: o.signature,
-          rawString: o.rawString,
           jsApiList: ['onMenuShareTimeline', 'onMenuShareAppMessage',
             'onMenuShareQQ', 'onMenuShareWeibo', 'onMenuShareQZone']
         });
