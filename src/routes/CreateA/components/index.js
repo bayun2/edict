@@ -34,8 +34,8 @@ class CreateA extends React.Component {
           <div className="logo"></div>
           <div className="main"></div>
           <div className="txt">
-            <p>{sourceNickName}:</p>
-            <p>这是一封来自<span className="nickname">{nickname}</span>陛下的旨意</p>
+            <p>{nickname}:</p>
+            <p>这是一封来自<span className="nickname">{sourceNickName}</span>陛下的旨意</p>
           </div>
           <div className="btngroup">
             <Link className="btn" to={addParam('/createf')}>打开</Link>
