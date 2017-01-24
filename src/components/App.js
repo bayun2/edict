@@ -49,7 +49,7 @@ class App extends React.Component {
             jsApiList: ['closeWindow', 'onMenuShareTimeline', 'onMenuShareAppMessage']
           });
           const weixin_share_config = {
-            link: this.props.shareUrl,
+            link: location.href.split('#')[0],
             imgUrl: '',
             success: function(type) {
             },

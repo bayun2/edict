@@ -34,8 +34,6 @@ class CreateD extends React.Component {
             const url = addParam('createe');
             browserHistory.push(url);
           } else if (status === 'reply') {
-            const url = addParam('createe');
-            browserHistory.push(url);
             self.setState({
               showBtn: true
             });

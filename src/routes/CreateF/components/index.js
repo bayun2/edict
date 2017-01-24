@@ -39,13 +39,8 @@ class CreateD extends React.Component {
           shareUrl: json.shareUrl,
           reply
         }, () => {
-          const isWeixin = (/MicroMessenger/ig).test(navigator.userAgent);
-          if (isWeixin) {
-            wx.closeWindow();
-          } else {
-            const url = self.props.addParam('created');
-            browserHistory.push(url);
-          }
+          const url = self.props.addParam('created');
+          browserHistory.push(url);
         });
       })
       .catch(() => {
