@@ -76,6 +76,8 @@ class CreateB extends React.Component {
 
   renderCnt() {
     const {addParam, status} = this.props;
+    let adImgHeight = 98*window.innerWidth/640;
+    adImgHeight = `${adImgHeight}px`;
     if (status === 'create') {
       return (
           <div className="createb page">
@@ -86,6 +88,7 @@ class CreateB extends React.Component {
               </div>
             </div>
             <div className="btn" onClick={this.sendEdict}>生成祝福</div>
+            <div className="ad" style={{height: adImgHeight}}></div>
           </div>
       );
     } else if (status === 'reply') {
@@ -98,6 +101,7 @@ class CreateB extends React.Component {
               </div>
             </div>
             <Link className="btn" onClick={this.replyEdict.bind(this, 1)}>生成</Link>
+            <div className="ad" style={{height: adImgHeight}}></div>
           </div>
       );
     }

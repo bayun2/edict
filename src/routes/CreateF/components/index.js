@@ -39,8 +39,13 @@ class CreateD extends React.Component {
           shareUrl: json.shareUrl,
           reply
         }, () => {
-          const url = self.props.addParam('created');
-          browserHistory.push(url);
+          const isWeixin = (/MicroMessenger/ig).test(navigator.userAgent);
+          if (isWeixin) {
+            wx.closeWindow();
+          } else {
+            const url = self.props.addParam('created');
+            browserHistory.push(url);
+          }
         });
       })
       .catch(() => {
@@ -63,6 +68,8 @@ class CreateD extends React.Component {
   render() {
     let top = window.innerWidth*832/640;
     top = `${top}px`;
+    let adImgHeight = 98*window.innerWidth/640;
+    adImgHeight = `${adImgHeight}px`;
     return (
         <div className="replyb picwrap">
           <img className="cutpic" src={this.props.curImage} />
@@ -70,6 +77,7 @@ class CreateD extends React.Component {
             <div className="btn a" onClick={this.reply}>复旨</div>
             <div className="btn b" onClick={this.refuse}>抗旨</div>
           </div>
+          <div className="ad" style={{height: adImgHeight}}></div>
         </div>
     );
   }

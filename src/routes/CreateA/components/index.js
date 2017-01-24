@@ -1,6 +1,5 @@
 import React from 'react';
 import * as ReactRouter from 'react-router';
-import UrlParse from 'url-parse';
 
 const {Link} = ReactRouter;
 

@@ -20,9 +20,12 @@ class CreateD extends React.Component {
   }
 
   componentDidMount() {
-    const {reply, status, addParam} = this.props;
+    const {reply, status, addParam, nickname} = this.props;
     const self = this;
     if (status !== 'receive') {
+      const shareTitle = status === 'create' ?
+      `这是一道来自${nickname}的新春圣旨` :  `尊敬的陛下，这是来自${nickname}的复旨`;
+      const shareDesc = status === 'create' ? '皇恩浩荡，还不快快接旨' : '爱卿回禀，请陛下用心体会';
       const weixin_share_config = {
         link: this.props.shareUrl,
         imgUrl: this.props.image,
@@ -39,11 +42,11 @@ class CreateD extends React.Component {
           }
         },
         timeline: {
-          title: this.props.msg
+          title: shareTitle
         },
         appmessage: {
-          title: '圣旨',
-          desc: this.props.msg
+          title: shareTitle,
+          desc: shareDesc
         }
       };
       new ShareWeixin(weixin_share_config);
@@ -85,18 +88,33 @@ class CreateD extends React.Component {
 
   renderCnt() {
     const {status, reply, image, curImage} = this.props;
+    let adImgHeight = 98*window.innerWidth/640;
+    adImgHeight = `${adImgHeight}px`;
     if (status === 'create') {
       return (
           <div className="created picwrap">
             {this.renderShowTip()}
             <img className="cutpic" src={image}/>
+            <div className="ad" style={{height: adImgHeight}}></div>
           </div>
       );
     } else if (status === 'reply') {
+      let top = window.innerWidth*832/640;
+      top = `${top}px`;
+      let btnCnt = '';
+      if (this.state.showBtn) {
+        btnCnt = (
+          <div className="btngroup" style={{top}}>
+            <a className="btn" href="//dlkddh.derlook.com/pages/createa">我也要颁圣旨</a>
+          </div>
+        );
+      }
       return (
         <div className="created picwrap">
           {this.renderShowTip()}
           <img className="cutpic" src={image} />
+          {btnCnt}
+          <div className="ad" style={{height: adImgHeight}}></div>
         </div>
       );
     } else if (status === 'receive') {
@@ -109,12 +127,14 @@ class CreateD extends React.Component {
             <div className="btngroup" style={{top}}>
               <a className="btn" href="//dlkddh.derlook.com/pages/createa">再玩一次</a>
             </div>
+            <div className="ad" style={{height: adImgHeight}}></div>
           </div>
         );
       } else if (reply === 2) {
         return (
           <div className="relyd picwrap">
             <img className="cutpic" src={curImage} />
+            <div className="ad" style={{height: adImgHeight}}></div>
           </div>
         );
       }

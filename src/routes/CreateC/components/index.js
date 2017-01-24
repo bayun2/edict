@@ -45,6 +45,8 @@ class CreateC extends React.Component {
   }
 
   render() {
+    let adImgHeight = 98*window.innerWidth/640;
+    adImgHeight = `${adImgHeight}px`;
     return (
         <div className="createc page">
           <div className="title">
@@ -54,6 +56,7 @@ class CreateC extends React.Component {
             </div>
           </div>
           <div className="btn" onClick={this.sendEdict}>生成指令</div>
+          <div className="ad" style={{height: adImgHeight}}></div>
         </div>
     );
   }

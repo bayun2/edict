@@ -25,10 +25,13 @@ class CreateE extends React.Component {
   }
 
   render() {
+    let adImgHeight = 98*window.innerWidth/640;
+    adImgHeight = `${adImgHeight}px`;
     return (
         <div className="createe page">
           <a className="btn a" href="//dlkddh.derlook.com/pages/createa"></a>
           <div className="btn b" onClick={this.closeWindow}></div>
+          <div className="ad" style={{height: adImgHeight}}></div>
         </div>
     );
   }

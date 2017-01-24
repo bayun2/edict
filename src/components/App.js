@@ -1,4 +1,5 @@
 import React from 'react';
+import ShareWeixin from '../lib/shareWeixin';
 
 class App extends React.Component {
 
@@ -47,6 +48,20 @@ class App extends React.Component {
             signature: o.signature,
             jsApiList: ['closeWindow', 'onMenuShareTimeline', 'onMenuShareAppMessage']
           });
+          const weixin_share_config = {
+            link: this.props.shareUrl,
+            imgUrl: '',
+            success: function(type) {
+            },
+            timeline: {
+              title: '作为人中龙凤，拜年的方式也要不一样！'
+            },
+            appmessage: {
+              title: '作为人中龙凤，拜年的方式也要不一样！',
+              desc: '值此新春佳节，如果你是皇上，是犒赏三军大赦天下，还是……'
+            }
+          };
+          new ShareWeixin(weixin_share_config);
         },
         error: function() {
 
