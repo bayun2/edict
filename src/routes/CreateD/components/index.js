@@ -86,7 +86,7 @@ class CreateD extends React.Component {
 
   renderCnt() {
     const {status, reply, image, curImage} = this.props;
-    let adImgHeight = 98*window.innerWidth/640;
+    let adImgHeight = 108*window.innerWidth/640;
     adImgHeight = `${adImgHeight}px`;
     if (status === 'create') {
       return (

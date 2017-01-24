@@ -61,9 +61,9 @@ class CreateD extends React.Component {
   }
 
   render() {
-    let top = window.innerWidth*832/640;
+    let top = window.innerWidth*800/640;
     top = `${top}px`;
-    let adImgHeight = 98*window.innerWidth/640;
+    let adImgHeight = 108*window.innerWidth/640;
     adImgHeight = `${adImgHeight}px`;
     return (
         <div className="replyb picwrap">

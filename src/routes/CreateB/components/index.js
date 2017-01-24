@@ -76,7 +76,7 @@ class CreateB extends React.Component {
 
   renderCnt() {
     const {addParam, status} = this.props;
-    let adImgHeight = 98*window.innerWidth/640;
+    let adImgHeight = 108*window.innerWidth/640;
     adImgHeight = `${adImgHeight}px`;
     if (status === 'create') {
       return (
