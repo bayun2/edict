@@ -20,7 +20,7 @@ class CreateB extends React.Component {
 
   handleChange(event) {
     let msg = event.target.value;
-    msg = msg.substr(0, 48);
+    msg = msg.substr(0, 20);
     this.props.setState({msg});
   }
 

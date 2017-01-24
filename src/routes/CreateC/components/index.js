@@ -15,7 +15,7 @@ class CreateC extends React.Component {
 
   handleChange(event) {
     let msg = event.target.value;
-    msg = msg.substr(0, 48);
+    msg = msg.substr(0, 20);
     this.props.setState({msg});
   }
 
@@ -69,7 +69,7 @@ CreateC.defaultProps = {
 CreateC.propTypes = {
   addParam: React.PropTypes.func,
   setState: React.PropTypes.func,
-  msg: React.PropTypes.string,
+  msg: React.PropTypes.string
 };
 
 module.exports = CreateC;
